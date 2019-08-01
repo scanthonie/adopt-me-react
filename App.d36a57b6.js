@@ -27442,34 +27442,26 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var useDropdown = function useDropdown(label, defaultState, options) {
-  var _useState = (0, _react.useState)(defaultState),
-      _useState2 = _slicedToArray(_useState, 2),
-      state = _useState2[0],
-      setState = _useState2[1];
+const useDropdown = (label, defaultState, options) => {
+  const _useState = (0, _react.useState)(defaultState),
+        _useState2 = _slicedToArray(_useState, 2),
+        state = _useState2[0],
+        setState = _useState2[1];
 
-  var id = "use-dropdown=".concat(label.replace(" ", "").toLowerCase());
+  const id = `use-dropdown=${label.replace(" ", "").toLowerCase()}`;
 
-  var Dropdown = function Dropdown() {
-    return _react.default.createElement("label", {
-      htmlFor: id
-    }, label, _react.default.createElement("select", {
-      id: id,
-      value: state,
-      onChange: function onChange(e) {
-        return setState(e.target.value);
-      },
-      onBlur: function onBlur(e) {
-        return setState(e.target.value);
-      },
-      disabled: options.length === 0
-    }, _react.default.createElement("option", null, "All"), options.map(function (item) {
-      return _react.default.createElement("option", {
-        key: item,
-        value: item
-      }, item);
-    })));
-  };
+  const Dropdown = () => _react.default.createElement("label", {
+    htmlFor: id
+  }, label, _react.default.createElement("select", {
+    id: id,
+    value: state,
+    onChange: e => setState(e.target.value),
+    onBlur: e => setState(e.target.value),
+    disabled: options.length === 0
+  }, _react.default.createElement("option", null, "All"), options.map(item => _react.default.createElement("option", {
+    key: item,
+    value: item
+  }, item))));
 
   return [state, Dropdown, setState];
 };
@@ -28509,7 +28501,7 @@ module.exports = function () {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *
+ * 
  */
 
 function makeEmptyFunction(arg) {
@@ -30120,20 +30112,20 @@ var _router = require("@reach/router");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Pet(_ref) {
-  var name = _ref.name,
+  let name = _ref.name,
       animal = _ref.animal,
       breed = _ref.breed,
       media = _ref.media,
       location = _ref.location,
       id = _ref.id;
-  var hero = "https://via.placeholder.com/300";
+  let hero = "https://via.placeholder.com/300";
 
   if (media.length) {
     hero = media[0].small;
   }
 
   return _react.default.createElement(_router.Link, {
-    to: "/details/".concat(id),
+    to: `/details/${id}`,
     className: "pet"
   }, _react.default.createElement("div", {
     className: "image-container"
@@ -30142,7 +30134,7 @@ function Pet(_ref) {
     alt: name
   })), _react.default.createElement("div", {
     className: "info"
-  }, _react.default.createElement("h1", null, name), _react.default.createElement("h2", null, "".concat(animal, " - ").concat(breed, " - ").concat(location))));
+  }, _react.default.createElement("h1", null, name), _react.default.createElement("h2", null, `${animal} - ${breed} - ${location}`)));
 }
 },{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"Results.js":[function(require,module,exports) {
 "use strict";
@@ -30158,21 +30150,19 @@ var _Pet = _interopRequireDefault(require("./Pet"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Results = function Results(_ref) {
-  var pets = _ref.pets;
+const Results = (_ref) => {
+  let pets = _ref.pets;
   return _react.default.createElement("div", {
     className: "search"
-  }, pets.length === 0 ? _react.default.createElement("h1", null, "No Pets Found") : pets.map(function (pet) {
-    return _react.default.createElement(_Pet.default, {
-      animal: pet.type,
-      id: pet.id,
-      key: pet.id,
-      name: pet.name,
-      breed: pet.breeds.primary,
-      media: pet.photos,
-      location: "".concat(pet.contact.address.city, ", ").concat(pet.contact.address.state)
-    });
-  }));
+  }, pets.length === 0 ? _react.default.createElement("h1", null, "No Pets Found") : pets.map(pet => _react.default.createElement(_Pet.default, {
+    animal: pet.type,
+    id: pet.id,
+    key: pet.id,
+    name: pet.name,
+    breed: pet.breeds.primary,
+    media: pet.photos,
+    location: `${pet.contact.address.city}, ${pet.contact.address.state}`
+  })));
 };
 
 var _default = Results;
@@ -30187,7 +30177,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var ThemeContext = (0, _react.createContext)(["green", function () {}]);
+const ThemeContext = (0, _react.createContext)(["green", () => {}]);
 var _default = ThemeContext;
 exports.default = _default;
 },{"react":"../node_modules/react/index.js"}],"SearchParams.js":[function(require,module,exports) {
@@ -30212,10 +30202,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -30224,82 +30210,57 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var SearchParams = function SearchParams() {
-  var _useState = (0, _react.useState)("Seattle, WA"),
-      _useState2 = _slicedToArray(_useState, 2),
-      location = _useState2[0],
-      setLocation = _useState2[1];
+const SearchParams = () => {
+  const _useState = (0, _react.useState)("Seattle, WA"),
+        _useState2 = _slicedToArray(_useState, 2),
+        location = _useState2[0],
+        setLocation = _useState2[1];
 
-  var _useDropdown = (0, _useDropdown5.default)("Animal", "dog", _pet.ANIMALS),
-      _useDropdown2 = _slicedToArray(_useDropdown, 2),
-      animal = _useDropdown2[0],
-      AnimalDropdown = _useDropdown2[1];
+  const _useDropdown = (0, _useDropdown5.default)("Animal", "dog", _pet.ANIMALS),
+        _useDropdown2 = _slicedToArray(_useDropdown, 2),
+        animal = _useDropdown2[0],
+        AnimalDropdown = _useDropdown2[1];
 
-  var _useState3 = (0, _react.useState)([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      breeds = _useState4[0],
-      setBreeds = _useState4[1];
+  const _useState3 = (0, _react.useState)([]),
+        _useState4 = _slicedToArray(_useState3, 2),
+        breeds = _useState4[0],
+        setBreeds = _useState4[1];
 
-  var _useDropdown3 = (0, _useDropdown5.default)("Breed", "", breeds),
-      _useDropdown4 = _slicedToArray(_useDropdown3, 3),
-      breed = _useDropdown4[0],
-      BreedDropdown = _useDropdown4[1],
-      setBreed = _useDropdown4[2];
+  const _useDropdown3 = (0, _useDropdown5.default)("Breed", "", breeds),
+        _useDropdown4 = _slicedToArray(_useDropdown3, 3),
+        breed = _useDropdown4[0],
+        BreedDropdown = _useDropdown4[1],
+        setBreed = _useDropdown4[2];
 
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      pets = _useState6[0],
-      setPets = _useState6[1];
+  const _useState5 = (0, _react.useState)([]),
+        _useState6 = _slicedToArray(_useState5, 2),
+        pets = _useState6[0],
+        setPets = _useState6[1];
 
-  var _useContext = (0, _react.useContext)(_ThemeContext.default),
-      _useContext2 = _slicedToArray(_useContext, 2),
-      theme = _useContext2[0],
-      setTheme = _useContext2[1];
+  const _useContext = (0, _react.useContext)(_ThemeContext.default),
+        _useContext2 = _slicedToArray(_useContext, 2),
+        theme = _useContext2[0],
+        setTheme = _useContext2[1];
 
-  function requestPets() {
-    return _requestPets.apply(this, arguments);
+  async function requestPets() {
+    const _ref = await _pet.default.animals({
+      location,
+      breed,
+      type: animal
+    }),
+          animals = _ref.animals;
+
+    setPets(animals || []);
   }
 
-  function _requestPets() {
-    _requestPets = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee() {
-      var _ref3, animals;
-
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _pet.default.animals({
-                location: location,
-                breed: breed,
-                type: animal
-              });
-
-            case 2:
-              _ref3 = _context.sent;
-              animals = _ref3.animals;
-              setPets(animals || []);
-
-            case 5:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-    return _requestPets.apply(this, arguments);
-  }
-
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     setBreeds([]);
     setBreed("");
 
-    _pet.default.breeds(animal).then(function (_ref) {
-      var breeds = _ref.breeds;
-      var breedStrings = breeds.map(function (_ref2) {
-        var name = _ref2.name;
+    _pet.default.breeds(animal).then((_ref2) => {
+      let breeds = _ref2.breeds;
+      const breedStrings = breeds.map((_ref3) => {
+        let name = _ref3.name;
         return name;
       });
       setBreeds(breedStrings);
@@ -30308,7 +30269,7 @@ var SearchParams = function SearchParams() {
   return _react.default.createElement("div", {
     className: "search-params"
   }, _react.default.createElement("form", {
-    onSubmit: function onSubmit(e) {
+    onSubmit: e => {
       e.preventDefault();
       requestPets();
     }
@@ -30318,19 +30279,13 @@ var SearchParams = function SearchParams() {
     id: "location",
     value: location,
     placeholder: "Location",
-    onChange: function onChange(e) {
-      return setLocation(e.target.value);
-    }
+    onChange: e => setLocation(e.target.value)
   })), _react.default.createElement(AnimalDropdown, null), _react.default.createElement(BreedDropdown, null), _react.default.createElement("label", {
     htmlFor: "theme"
   }, _react.default.createElement("select", {
     value: theme,
-    onChange: function onChange(e) {
-      return setTheme(e.target.value);
-    },
-    onBlur: function onBlur(e) {
-      return setTheme(e.target.value);
-    }
+    onChange: e => setTheme(e.target.value),
+    onBlur: e => setTheme(e.target.value)
   }, _react.default.createElement("option", {
     value: "peru"
   }, "Peru"), _react.default.createElement("option", {
@@ -30362,108 +30317,64 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var Carousel =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Carousel, _React$Component);
+class Carousel extends _react.default.Component {
+  constructor() {
+    super(...arguments);
 
-  function Carousel() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, Carousel);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Carousel)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "state", {
+    _defineProperty(this, "state", {
       photos: [],
       active: 0
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handldIndexClick", function (evt) {
-      _this.setState({
+    _defineProperty(this, "handldIndexClick", evt => {
+      this.setState({
         active: +evt.target.dataset.index
       });
     });
-
-    return _this;
   }
 
-  _createClass(Carousel, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
+  static getDerivedStateFromProps(_ref) {
+    let media = _ref.media;
+    let photos = ["https://via.placeholder.com/300"];
 
-      var _this$state = this.state,
+    if (media.length) {
+      photos = media.map((_ref2) => {
+        let large = _ref2.large;
+        return large;
+      });
+    }
+
+    return {
+      photos
+    };
+  }
+
+  render() {
+    const _this$state = this.state,
           photos = _this$state.photos,
           active = _this$state.active;
-      return _react.default.createElement("div", {
-        className: "carousel"
-      }, _react.default.createElement("img", {
-        src: photos[active],
-        alt: "animal"
-      }), _react.default.createElement("div", {
-        className: "carousel-smaller"
-      }, photos.map(function (photo, idx) {
-        return (// eslint-disable-next-line
-          _react.default.createElement("img", {
-            key: photo,
-            onClick: _this2.handldIndexClick,
-            onKeyUp: _this2.handldIndexClick,
-            "data-index": idx,
-            src: photo,
-            alt: "animal thumbnail",
-            className: idx === active ? "active" : ""
-          })
-        );
-      })));
-    }
-  }], [{
-    key: "getDerivedStateFromProps",
-    value: function getDerivedStateFromProps(_ref) {
-      var media = _ref.media;
-      var photos = ["https://via.placeholder.com/300"];
+    return _react.default.createElement("div", {
+      className: "carousel"
+    }, _react.default.createElement("img", {
+      src: photos[active],
+      alt: "animal"
+    }), _react.default.createElement("div", {
+      className: "carousel-smaller"
+    }, photos.map((photo, idx) => // eslint-disable-next-line
+    _react.default.createElement("img", {
+      key: photo,
+      onClick: this.handldIndexClick,
+      onKeyUp: this.handldIndexClick,
+      "data-index": idx,
+      src: photo,
+      alt: "animal thumbnail",
+      className: idx === active ? "active" : ""
+    }))));
+  }
 
-      if (media.length) {
-        photos = media.map(function (_ref2) {
-          var large = _ref2.large;
-          return large;
-        });
-      }
-
-      return {
-        photos: photos
-      };
-    }
-  }]);
-
-  return Carousel;
-}(_react.default.Component);
+}
 
 var _default = Carousel;
 exports.default = _default;
@@ -30481,98 +30392,53 @@ var _router = require("@reach/router");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var ErrorBoundary =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(ErrorBoundary, _React$Component);
+class ErrorBoundary extends _react.default.Component {
+  constructor() {
+    super(...arguments);
 
-  function ErrorBoundary() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, ErrorBoundary);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ErrorBoundary)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "state", {
+    _defineProperty(this, "state", {
       hasError: false,
       redirect: false
     });
-
-    return _this;
   }
 
-  _createClass(ErrorBoundary, [{
-    key: "componentDidCatch",
-    value: function componentDidCatch(error, info) {
-      console.error("Error Boundary caought an error", error, info);
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      var _this2 = this;
+  static getDerivedStateFromError() {
+    return {
+      hasError: true
+    };
+  }
 
-      if (this.state.hasError) {
-        setTimeout(function () {
-          return _this2.setState({
-            redirect: true
-          });
-        }, 5000);
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      if (this.state.redirect) {
-        return _react.default.createElement(_router.Redirect, {
-          to: "/"
-        });
-      }
+  componentDidCatch(error, info) {
+    console.error("Error Boundary caought an error", error, info);
+  }
 
-      if (this.state.hasError) {
-        return _react.default.createElement("h1", null, "There was an error with this listing.", " ", _react.default.createElement(_router.Link, {
-          to: "/"
-        }, "Click here to return to home page"), ", or wait for five seconds.");
-      }
-
-      return this.props.children;
+  componentDidUpdate() {
+    if (this.state.hasError) {
+      setTimeout(() => this.setState({
+        redirect: true
+      }), 5000);
     }
-  }], [{
-    key: "getDerivedStateFromError",
-    value: function getDerivedStateFromError() {
-      return {
-        hasError: true
-      };
-    }
-  }]);
+  }
 
-  return ErrorBoundary;
-}(_react.default.Component);
+  render() {
+    if (this.state.redirect) {
+      return _react.default.createElement(_router.Redirect, {
+        to: "/"
+      });
+    }
+
+    if (this.state.hasError) {
+      return _react.default.createElement("h1", null, "There was an error with this listing.", " ", _react.default.createElement(_router.Link, {
+        to: "/"
+      }, "Click here to return to home page"), ", or wait for five seconds.");
+    }
+
+    return this.props.children;
+  }
+
+}
 
 var _default = ErrorBoundary;
 exports.default = _default;
@@ -30590,21 +30456,19 @@ var _reactDom = require("react-dom");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
-var Modal = function Modal(_ref) {
-  var children = _ref.children;
-  var elRef = (0, _react.useRef)(null);
+const Modal = (_ref) => {
+  let children = _ref.children;
+  const elRef = (0, _react.useRef)(null);
 
   if (!elRef.current) {
-    var div = document.createElement("div");
+    const div = document.createElement("div");
     elRef.current = div;
   }
 
-  (0, _react.useEffect)(function () {
-    var modalRoot = document.getElementById("modal");
+  (0, _react.useEffect)(() => {
+    const modalRoot = document.getElementById("modal");
     modalRoot.appendChild(elRef.current);
-    return function () {
-      return modalRoot.removeChild(elRef.current);
-    };
+    return () => modalRoot.removeChild(elRef.current);
   }, []);
   return (0, _reactDom.createPortal)(_react.default.createElement("div", null, children), elRef.current);
 };
@@ -30635,8 +30499,6 @@ var _Modal = _interopRequireDefault(require("./Modal"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -30645,122 +30507,80 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var Details =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Details, _React$Component);
+class Details extends _react.default.Component {
+  constructor() {
+    super(...arguments);
 
-  function Details() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, Details);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Details)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "state", {
+    _defineProperty(this, "state", {
       loading: true,
       showModal: false
     });
 
-    _defineProperty(_assertThisInitialized(_this), "toggleModal", function () {
-      _this.setState({
-        showModal: !_this.state.showModal
+    _defineProperty(this, "toggleModal", () => {
+      this.setState({
+        showModal: !this.state.showModal
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "adopt", function () {
-      (0, _router.navigate)(_this.state.url);
+    _defineProperty(this, "adopt", () => {
+      (0, _router.navigate)(this.state.url);
     });
-
-    return _this;
   }
 
-  _createClass(Details, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      _pet.default.animal(this.props.id).then(function (_ref) {
-        var animal = _ref.animal;
-
-        _this2.setState({
-          url: animal.url,
-          name: animal.name,
-          animal: animal.type,
-          location: "".concat(animal.contact.address.city, ", ").concat(animal.contact.address.state),
-          description: animal.description,
-          media: animal.photos,
-          breed: animal.breeds.primary,
-          loading: false
-        });
+  componentDidMount() {
+    _pet.default.animal(this.props.id).then((_ref) => {
+      let animal = _ref.animal;
+      this.setState({
+        url: animal.url,
+        name: animal.name,
+        animal: animal.type,
+        location: `${animal.contact.address.city}, ${animal.contact.address.state}`,
+        description: animal.description,
+        media: animal.photos,
+        breed: animal.breeds.primary,
+        loading: false
       });
+    });
+  }
+
+  render() {
+    if (this.state.loading) {
+      return _react.default.createElement("h1", null, "loading...");
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
 
-      if (this.state.loading) {
-        return _react.default.createElement("h1", null, "loading...");
-      }
-
-      var _this$state = this.state,
+    const _this$state = this.state,
           animal = _this$state.animal,
           breed = _this$state.breed,
           location = _this$state.location,
           description = _this$state.description,
           name = _this$state.name,
           media = _this$state.media;
-      return _react.default.createElement("div", {
-        className: "details"
-      }, _react.default.createElement(_Carousel.default, {
-        media: media
-      }), _react.default.createElement("div", null, _react.default.createElement("h1", null, name), _react.default.createElement("h2", null, "".concat(animal, " - ").concat(breed, " - ").concat(location)), _react.default.createElement(_ThemeContext.default.Consumer, null, function (_ref2) {
-        var _ref3 = _slicedToArray(_ref2, 1),
-            theme = _ref3[0];
+    return _react.default.createElement("div", {
+      className: "details"
+    }, _react.default.createElement(_Carousel.default, {
+      media: media
+    }), _react.default.createElement("div", null, _react.default.createElement("h1", null, name), _react.default.createElement("h2", null, `${animal} - ${breed} - ${location}`), _react.default.createElement(_ThemeContext.default.Consumer, null, (_ref2) => {
+      let _ref3 = _slicedToArray(_ref2, 1),
+          theme = _ref3[0];
 
-        return _react.default.createElement("button", {
-          onClick: _this3.toggleModal,
-          style: {
-            backgroundColor: theme
-          }
-        }, "Adopt ", name);
-      }), _react.default.createElement("p", null, description), this.state.showModal ? _react.default.createElement(_Modal.default, null, _react.default.createElement("div", null, _react.default.createElement("h1", null, "Would you like to adopt ", name, "?"), _react.default.createElement("div", {
-        className: "buttons"
-      }, _react.default.createElement("button", {
-        onClick: this.adopt
-      }, "Yes"), _react.default.createElement("button", {
-        onClick: this.toggleModal
-      }, "No")))) : null));
-    }
-  }]);
+      return _react.default.createElement("button", {
+        onClick: this.toggleModal,
+        style: {
+          backgroundColor: theme
+        }
+      }, "Adopt ", name);
+    }), _react.default.createElement("p", null, description), this.state.showModal ? _react.default.createElement(_Modal.default, null, _react.default.createElement("div", null, _react.default.createElement("h1", null, "Would you like to adopt ", name, "?"), _react.default.createElement("div", {
+      className: "buttons"
+    }, _react.default.createElement("button", {
+      onClick: this.adopt
+    }, "Yes"), _react.default.createElement("button", {
+      onClick: this.toggleModal
+    }, "No")))) : null));
+  }
 
-  return Details;
-}(_react.default.Component);
+}
 
 function DetailsWithErrorBoundary(props) {
   return _react.default.createElement(_ErrorBoundary.default, null, _react.default.createElement(Details, props));
@@ -30784,8 +30604,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
-var App = function App() {
-  var themeHook = (0, _react.useState)("peru");
+const App = () => {
+  const themeHook = (0, _react.useState)("peru");
   return _react.default.createElement(_ThemeContext.default.Provider, {
     value: themeHook
   }, _react.default.createElement("div", null, _react.default.createElement("header", null, _react.default.createElement(_router.Link, {
@@ -30826,7 +30646,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59769" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64816" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -31002,4 +30822,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","App.js"], null)
-//# sourceMappingURL=/adopt-me-react/App.8fa37aa0.js.map
+//# sourceMappingURL=/App.d36a57b6.js.map
