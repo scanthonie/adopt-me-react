@@ -20,15 +20,15 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/" />;
+      return <Redirect to="/adopt-me-react/" />;
     }
 
     if (this.state.hasError) {
       return (
         <h1>
           There was an error with this listing.{" "}
-          <Link to="/">Click here to return to home page</Link>, or wait for
-          five seconds.
+          <Link to="/adopt-me-react/">Click here to return to home page</Link>,
+          or wait for five seconds.
         </h1>
       );
     }

@@ -14,8 +14,8 @@ const App = () => {
           <Link to="/">Adopt Me!</Link>
         </header>
         <Router>
-          <SearchParams path="/" />
-          <DetailsWithErrorBoundary path="/details/:id" />
+          <SearchParams path="/adopt-me-react/" />
+          <DetailsWithErrorBoundary path="/adopt-me-react/details/:id" />
         </Router>
       </div>
     </ThemeContext.Provider>

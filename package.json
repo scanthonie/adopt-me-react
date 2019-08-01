@@ -9,7 +9,7 @@
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "dev:mock": "cross-env PET_MOCK=mock parcel src/index.html",
     "build": "parcel build src/index.html",
-    "predeploy": "rm -rf dist && NODE_ENV=development parcel build src/index.html --no-minify --out-dir adopt-me-react --public-url /adopt-me-react",
+    "predeploy": "rm -rf dist && parcel build src/index.html --no-minify --public-url /adopt-me-react",
     "deploy": "gh-pages -d dist"
   },
   "author": "",
