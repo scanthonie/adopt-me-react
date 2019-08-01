@@ -30822,4 +30822,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","App.js"], null)
-//# sourceMappingURL=/App.d36a57b6.js.map
+//# sourceMappingURL=/adopt-me-react/App.d36a57b6.js.map
